@@ -5,9 +5,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public abstract class Message {
+public class TextMessage extends Message {
 
-	private String avatarUrl;
-	private String timestamp;
-	private String by;	
+	private String messageContent;
 }
