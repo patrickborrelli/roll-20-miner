@@ -1,0 +1,49 @@
+<div class="message general" data-messageid="-MsXVdjNFW6CNHUYl1OK">
+    <div class="spacer"></div>
+    <div class="avatar" aria-hidden="true">
+        <img src="https://app.roll20.net/users/avatar/6323840/30">
+    </div>
+    <span class="tstamp" aria-hidden="true">
+        January 03, 2022 7:34PM
+    </span>
+    <span class="by">Rob W.:</span>
+    
+    <div class="sheet-rolltemplate-atkdmg">
+        <div class="sheet-container sheet-atk">
+            <div class="sheet-result">
+                <div class="sheet-solo">
+                    <span>
+                        <span class="inlinerollresult showtip tipsy-n-right" title="Rolling 1d20cs&gt;20 + 3[STR] + 2[PROF] = (&lt;span class=&quot;basicdiceroll&quot;&gt;7&lt;/span&gt;)+3+2">
+                            12
+                        </span>
+                    </span>
+                </div>
+            </div>
+            <div class="sheet-label">
+                <span>Longsword (One-Handed) <span>(+5)</span></span>
+            </div>
+        </div>
+
+        <div class="sheet-desc">
+            <span>
+                <span class="inlinerollresult showtip tipsy-n-right" title="Rolling 2[Fighting Style: Dueling] = 2">2</span>
+                =20
+            </span>
+            <span class="sheet-sublabel">Dueling Style</span>
+        </div>
+        <div class="sheet-container sheet-damagetemplate">
+            <div class="sheet-result">
+                <div class="sheet-solo">
+                    <span class="sheet-damage">
+                        <span class="inlinerollresult showtip tipsy-n-right" title="Rolling 1d8 + 3[STR] = (&lt;span class=&quot;basicdiceroll&quot;&gt;5&lt;/span&gt;)+3">8</span>
+                        =20
+                    </span>
+                    <span class="sheet-sublabel">Slashing</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="menu-MsXVdjNFW6CNHUYl1OK" class="flyout"></div>
+    
+</div>

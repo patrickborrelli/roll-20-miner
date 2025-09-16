@@ -1,0 +1,17 @@
+<div class="message general" data-messageid="-Mt61SRwt1ydFibjOl3_">
+    <div class="spacer"></div>
+    <div class="avatar" aria-hidden="true"><img src="https://files.d20.io/images/262806729/Ic0ZpWAsTj6fZKglSZiCfw/med.jpg?1641157839"></div><span class="tstamp" aria-hidden="true">January 10, 2022 9:48PM</span><span class="by">Mouse:</span>
+    <div class="sheet-rolltemplate-simple">
+        <div class="sheet-container">
+            <div class="sheet-result">
+                <div class="sheet-solo">
+                    <span><span class="inlinerollresult showtip tipsy-n-right" title="Rolling 1d20+2[Proficiency]+2[wisdom] = (&lt;span class=&quot;basicdiceroll&quot;&gt;9&lt;/span&gt;)+2+2">13</span></span>
+                </div>
+            </div>
+            <div class="sheet-label">
+                <span>PERCEPTION <span>(4)</span></span>
+            </div>
+        </div>
+    </div>
+    <div id="menu-Mt61SRwt1ydFibjOl3_" class="flyout"></div>
+</div>

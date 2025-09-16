@@ -1,0 +1,30 @@
+<div class="message general you" data-messageid="-MsRgpuTHZKhhE5PDwLz">
+    <div class="spacer"></div>
+    <div class="avatar" aria-hidden="true"><img src="https://app.roll20.net/users/avatar/2888066/30"></div>
+    <span class="tstamp" aria-hidden="true">January 02, 2022 4:30PM</span>
+    <span class="by">patrick (GM):</span>
+    
+    <div class="sheet-rolltemplate-atk">
+        <div class="sheet-container">
+            <div class="sheet-result">
+                <div class="sheet-solo">
+                    <span>
+                        <span class="inlinerollresult showtip tipsy-n-right" title="Rolling 1d20cs&gt;20 + 2[PROF] = (&lt;span class=&quot;basicdiceroll&quot;&gt;16&lt;/span&gt;)+2">
+                            18
+                        </span>
+                    </span>
+                </div>
+            </div>
+            <div class="sheet-label">
+                =20
+                <span>
+                    <a href="https://app.roll20.net/campaigns/chatarchive/~-MsRc9-NSAYo8pLiiytR%7Crepeating_attack_-MsRgY5CI9ADQJNLx6mI_attack_dmg">
+                        Shortsword off-hand
+                    </a> 
+                    <span>(+2)</span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div id="menu-MsRgpuTHZKhhE5PDwLz" class="flyout"></div>
+</div>

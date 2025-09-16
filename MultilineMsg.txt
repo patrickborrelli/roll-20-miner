@@ -1,0 +1,19 @@
+<div class="message general" data-messageid="-MsXZjUfwHuiDmAWSPwL">
+    <div class="spacer"></div>
+    <div class="avatar" aria-hidden="true">
+        <img src="https://app.roll20.net/users/avatar/761950/30">
+    </div>
+    <span class="tstamp" aria-hidden="true">
+        January 03, 2022 7:52PM
+    </span>
+    <span class="by">
+        Doug:
+    </span>
+    Heard you, just don't think I have it set up to use my headset.
+    <div id="menu-MsXZjUfwHuiDmAWSPwL" class="flyout"></div>
+</div>
+
+<div class="message general" data-messageid="-MsXZkYK1Otb8cYNka8B">
+    One sec.
+    <div id="menu-MsXZkYK1Otb8cYNka8B" class="flyout"></div>
+</div>

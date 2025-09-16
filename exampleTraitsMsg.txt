@@ -1,0 +1,16 @@
+<div class="message general you" data-messageid="-MsXseXo-aAZeFv5ru8h">
+    <div class="sheet-rolltemplate-traits">
+        <div class="sheet-row sheet-header">
+            <span>Sneak Attack</span>
+        </div>
+        <div class="sheet-row sheet-subheader">
+            <span class="sheet-italics">Class: Rogue</span>
+        </div>
+        <div class="sheet-row">
+            <span class="sheet-desc">Beginning at 1st level, you know how to strike subtly and exploit a foe=E2=80=99s distraction. Once per turn, you can deal an extra 1d6 damage to one creature you hit with an attack if you have advantage on the attack roll. The attack must use a finesse or a ranged weapon.<br>
+                You don=E2=80=99t need advantage on the attack roll if another enemy of the target is within 5 feet of it, that enemy isn=E2=80=99t incapacitated, and you don=E2=80=99t have disadvantage on the attack roll.<br>
+                The amount of the extra damage increases as you gain levels in this class, as shown in the Sneak Attack column of the Rogue table.</span>
+        </div>
+    </div>
+    <div id="menu-MsXseXo-aAZeFv5ru8h" class="flyout"></div>
+</div>

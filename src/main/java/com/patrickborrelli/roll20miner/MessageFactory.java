@@ -3,44 +3,27 @@ package com.patrickborrelli.roll20miner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jsoup.nodes.Element;
-import org.jsoup.nodes.Node;
 import org.jsoup.select.Elements;
 
 import com.patrickborrelli.roll20miner.model.Message;
 import com.patrickborrelli.roll20miner.model.TextMessage;
+import com.patrickborrelli.roll20miner.util.MinerUtil;
 
-public class MessageFactory {
-	
+public class MessageFactory {	
 	private static final Logger LOGGER = LogManager.getLogger(MessageFactory.class);
 	
-	private static final String TIMESTAMP_CLASS = "tstamp";
-	private static final String SENDER_CLASS = "by";
-	private static final String AVATAR_URL_CLASS = "avatar";
-	private static final String ATTACK_CLASS = "sheet-atk";
-
-	protected Message createMessageObject(Element element) {
+	public Message createMessageObject(Elements elements) {
 		Message message = null;
-		String timestamp = null;
-		Elements elements = null;
-		Element first = null;
 		
-		//create the appropriate concrete Message instance based on element contents:
-		first = element.getElementsByClass("sheet-atk").first();
-		
-		if(first != null) {
-			//we have an attack message
-			message = createAttackMessage(element);
-		} else {
-			message = createTextMessage(element);
-		}
 		
 		return message;
 	}
 
+	/**
 	private Message createTextMessage(Element element) {
 		Message message = new TextMessage();
 		populateGenericMessage(message, element);
-		String text = retrieveMessageText(element);
+		//String text = retrieveMessageText(element);
 		
 		if(text != null && !text.isEmpty()) {
 			((TextMessage)message).setMessageContent(text);
@@ -52,8 +35,10 @@ public class MessageFactory {
 	}
 
 	private Message createAttackMessage(Element element) {
-		// TODO Auto-generated method stub
-		return null;
+		Message message = new TextMessage();
+		populateGenericMessage(message, element);
+		
+		return message;
 	}
 	
 	private void populateGenericMessage(Message message, Element element) {
@@ -85,7 +70,7 @@ public class MessageFactory {
 		
 	private String retrieveTimestamp(Element element) {
 		String result = null;
-		Elements elements = element.getElementsByClass(TIMESTAMP_CLASS);
+		Elements elements = element.getElementsByClass(MinerUtil.TIMESTAMP);
 		Element first = elements.first();
 		
 		if(!elements.isEmpty() && first != null) { 
@@ -97,7 +82,7 @@ public class MessageFactory {
 	
 	private String retrieveSender(Element element) {
 		String result = null;
-		Elements elements = element.getElementsByClass(SENDER_CLASS);
+		Elements elements = element.getElementsByClass(MinerUtil.SENDER);
 		Element first = elements.first();
 		
 		if(!elements.isEmpty() && first != null) { 
@@ -109,26 +94,16 @@ public class MessageFactory {
 	
 	private String retrieveAvatar(Element element) {
 		String result = null;
-		Elements elements = element.getElementsByClass(AVATAR_URL_CLASS);
+		Elements elements = element.getElementsByClass(MinerUtil.AVATAR_URL);
 		Element first = elements.first();
 		
-		if(!elements.isEmpty() && first != null) { 			
-			LOGGER.debug(first.child(0).attr("src"));
-			result = first.child(0).attr("src");
+		if(!elements.isEmpty() && first != null) { 	
+			if(first.childNodeSize() > 0) {
+				LOGGER.debug(first.child(0).attr("src"));
+				result = first.child(0).attr("src");
+			}			
 		}		
 		return result;
 	}
-	
-	private String retrieveMessageText(Element element) {
-		String result = null;
-		Elements elements = element.getElementsByClass(SENDER_CLASS);
-		Element first = elements.first();
-		
-		if(!elements.isEmpty() && first != null) { 
-			Element parent = first.parent();
-			result = parent.childNode(first.siblingIndex() +1 ).toString();
-			LOGGER.debug(result);
-		}		
-		return result;
-	}
+	**/
 }
