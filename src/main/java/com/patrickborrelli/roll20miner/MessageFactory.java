@@ -3,17 +3,34 @@ package com.patrickborrelli.roll20miner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
+import com.patrickborrelli.roll20miner.model.AttackMessage;
+import com.patrickborrelli.roll20miner.model.DamageMessage;
 import com.patrickborrelli.roll20miner.model.Message;
-import com.patrickborrelli.roll20miner.model.TextMessage;
 import com.patrickborrelli.roll20miner.util.MinerUtil;
 
 public class MessageFactory {	
 	private static final Logger LOGGER = LogManager.getLogger(MessageFactory.class);
+	private static int messageIndex = 0;
 	
-	public Message createMessageObject(Elements elements) {
+	public Message createMessageObject(Element element) {
 		Message message = null;
+		String avatarUrl = null;
+		String timestamp = null;
+		String sender = null;
+		
+		//first attempt to extract common elements:
+		timestamp = retrieveTimestamp(element);
+		avatarUrl = retrieveAvatar(element);
+		sender = retrieveSender(element);
+		
+		//TODO: build avatarLookup map/utilize if values are missing
+		
+		//determine the type of message for proper factory creation:
+		if(element.getElementsByClass(MinerUtil.ATTACK).first() != null) {
+			message = new AttackMessage(avatarUrl, timestamp, sender, messageIndex++, element);
+		} else if(element.getElementsByClass(MinerUtil.ATTACK_DMG).first() != null) {
+			message = new DamageMessage(avatarUrl, timestamp, sender, messageIndex++, element);
+		}
 		
 		
 		return message;
@@ -67,13 +84,13 @@ public class MessageFactory {
 			LOGGER.warn("Current message does not have an associated avatar.");
 		}		
 	}
+		**/
 		
 	private String retrieveTimestamp(Element element) {
 		String result = null;
-		Elements elements = element.getElementsByClass(MinerUtil.TIMESTAMP);
-		Element first = elements.first();
+		Element first = element.getElementsByClass(MinerUtil.TIMESTAMP).first();
 		
-		if(!elements.isEmpty() && first != null) { 
+		if(first != null) { 
 			LOGGER.debug(first.text());
 			result = first.text();
 		}		
@@ -82,10 +99,9 @@ public class MessageFactory {
 	
 	private String retrieveSender(Element element) {
 		String result = null;
-		Elements elements = element.getElementsByClass(MinerUtil.SENDER);
-		Element first = elements.first();
+		Element first = element.getElementsByClass(MinerUtil.SENDER).first();
 		
-		if(!elements.isEmpty() && first != null) { 
+		if(first != null) { 
 			LOGGER.debug(first.text());
 			result = first.text();
 		}		
@@ -94,10 +110,9 @@ public class MessageFactory {
 	
 	private String retrieveAvatar(Element element) {
 		String result = null;
-		Elements elements = element.getElementsByClass(MinerUtil.AVATAR_URL);
-		Element first = elements.first();
+		Element first = element.getElementsByClass(MinerUtil.AVATAR_URL).first();
 		
-		if(!elements.isEmpty() && first != null) { 	
+		if(first != null) { 	
 			if(first.childNodeSize() > 0) {
 				LOGGER.debug(first.child(0).attr("src"));
 				result = first.child(0).attr("src");
@@ -105,5 +120,5 @@ public class MessageFactory {
 		}		
 		return result;
 	}
-	**/
+
 }

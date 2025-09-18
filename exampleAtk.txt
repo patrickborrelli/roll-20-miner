@@ -6,6 +6,7 @@
     
     <div class="sheet-rolltemplate-atk">
         <div class="sheet-container">
+        
             <div class="sheet-result">
                 <div class="sheet-solo">
                     <span>
@@ -15,6 +16,7 @@
                     </span>
                 </div>
             </div>
+            
             <div class="sheet-label">
                 =20
                 <span>

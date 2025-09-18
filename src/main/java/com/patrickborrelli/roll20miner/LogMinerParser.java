@@ -25,6 +25,8 @@ import lombok.Data;
 public class LogMinerParser {
 	private static final Logger LOGGER = LogManager.getLogger(LogMinerParser.class);
 	
+	private MessageFactory factory = new MessageFactory();
+	
 	/**
 	 * Responsible for mapping a name to an avatar url
 	 * to facilitate cases where one or the other are not 
@@ -50,6 +52,7 @@ public class LogMinerParser {
 		List<Message> result = new ArrayList<>();
 		Elements parsedElements = new Elements();
 		Elements workingElements = new Elements();
+		Element combine = null;
 		
 		for(Element currElement : contents) {
 			boolean isTimestamp = currElement.getElementsByClass(MinerUtil.TIMESTAMP).first() != null;
@@ -62,7 +65,8 @@ public class LogMinerParser {
 				if(isDesc || isEmote) {
 					//these will only ever be single line messages, but neither has a timestamp,
 					//so push them directly to the parsed messages after pushing the working elements:
-					parsedElements.add(combineElements(workingElements));
+					combine = combineElements(workingElements);
+					if(combine != null)  parsedElements.add(combine);
 					workingElements.clear();
 					parsedElements.add(currElement);
 				} else {
@@ -71,11 +75,20 @@ public class LogMinerParser {
 			} else {
 				//found a timestamp, so this is the beginning or entirety of a new message.
 				//send any previous working elements collection for combining:
-				parsedElements.add(combineElements(workingElements));
+				combine = combineElements(workingElements);
+				if(combine != null)  parsedElements.add(combine);
 				workingElements.clear();
 				workingElements.add(currElement);				
 			}
-		}			
+		}		
+		//resolve any remaining elements in the working collection:
+		combine = combineElements(workingElements);
+		if(combine != null)  parsedElements.add(combine);
+		
+		//now iterate through the combined elements and send them off to the message factory to translate to message objects
+		for(Element nextElement : parsedElements) {
+			result.add(factory.createMessageObject(nextElement));
+		}
 		
 		return result;
 	}
@@ -87,10 +100,17 @@ public class LogMinerParser {
 			if(workingElements.size() < 2) {
 				result = workingElements.first();
 			} else {
-				LOGGER.debug("To combine: \n\t {}", workingElements.toString());
+				LOGGER.debug("COMBINING: {}", workingElements.toString());
+				result = workingElements.first();
+				workingElements.remove(0);
+				
+				//iterate through any additional elements and add their contents to the result element:
+				for(Element next : workingElements) {
+					result.insertChildren(-1, next.childNodes());
+				}		
+				LOGGER.debug("WITH RESULT: {}", result.toString());
 			}
-		}
-		
+		}		
 		
 		return result;
 	}

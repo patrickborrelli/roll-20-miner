@@ -1,9 +1,8 @@
 com\patrickborrelli\roll20miner\LogMinerParser.class
+com\patrickborrelli\roll20miner\model\DamageMessage.class
 com\patrickborrelli\roll20miner\model\Message.class
 com\patrickborrelli\roll20miner\Roll20LogMiner.class
-com\patrickborrelli\roll20miner\model\SheetDamage.class
 com\patrickborrelli\roll20miner\util\MinerUtil.class
 com\patrickborrelli\roll20miner\model\AttackMessage.class
 com\patrickborrelli\roll20miner\model\TextMessage.class
-com\patrickborrelli\roll20miner\model\InlineRollResult.class
 com\patrickborrelli\roll20miner\MessageFactory.class

@@ -9,7 +9,9 @@
     <span class="by">Rob W.:</span>
     
     <div class="sheet-rolltemplate-atkdmg">
+        
         <div class="sheet-container sheet-atk">
+        
             <div class="sheet-result">
                 <div class="sheet-solo">
                     <span>
@@ -19,9 +21,11 @@
                     </span>
                 </div>
             </div>
+            
             <div class="sheet-label">
                 <span>Longsword (One-Handed) <span>(+5)</span></span>
             </div>
+            
         </div>
 
         <div class="sheet-desc">
@@ -31,6 +35,7 @@
             </span>
             <span class="sheet-sublabel">Dueling Style</span>
         </div>
+        
         <div class="sheet-container sheet-damagetemplate">
             <div class="sheet-result">
                 <div class="sheet-solo">
