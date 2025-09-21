@@ -18,6 +18,7 @@ public class MinerUtil {
 	public static final String MESSAGE = "message";
 	public static final String DESCRIPTION = "desc";
 	public static final String EMOTE = "emote";
+	public static final String SPELLDESC = "sheet-spelldesc-link";
 	
 	public static final String TIMESTAMP = "tstamp";
 	public static final String SENDER = "by";

@@ -1,0 +1,267 @@
+<div class="message general you" data-messageid="-MsXnG3Eut1HWZH1AnnL">
+    <div class="spacer"></div>
+    <div class="avatar" aria-hidden="true"><img src="https://app.roll20.net/users/avatar/2888066/30"></div>
+    <span class="tstamp" aria-hidden="true">January 03, 2022 8:56PM</span>
+    <span class="by">DM (GM):</span>
+    
+    <div class="sheet-rolltemplate-atkdmg">
+        <div class="sheet-container sheet-damagetemplate">
+            <div class="sheet-result">
+                <div class="sheet-solo">
+                    <span class="sheet-damage">
+                        <span class="inlinerollresult showtip tipsy-n-right" title="Rolling 1d8 + 3[CHA] = (&lt;span class=&quot;basicdiceroll&quot;&gt;5&lt;/span&gt;)+3">8</span>
+                    </span>
+                    <span class="sheet-sublabel">Healing</span>
+                </div>
+            </div>
+            <div class="sheet-sublabel">
+                <span>Touch</span>
+            </div>
+            <div class="sheet-label">
+                <span>Cure Wounds</span>
+            </div>
+            <div class="sheet-spelldesc-link">
+                <span><a href="https://app.roll20.net/campaigns/chatarchive/~-MsXVMVZkKMtr3mPvqxG%7Crepeating_attack_-MsXWUqtNZA0zgZlzfNJ_spelldesc_link">Show Spell Description</a></span>
+            </div>
+        </div>
+    </div>
+    <div id="menu-MsXnG3Eut1HWZH1AnnL" class="flyout"></div>
+</div>
+
+<div class="message general" data-messageid="-MyFf52ikq6ksE-R4j8h">
+    <div class="spacer"></div>
+    <div class="avatar" aria-hidden="true"><img src="https://files.d20.io/images/262814262/ef13Ua-T9db7eAb_EaqV9g/med.jpg?1641160187"></div><span class="tstamp" aria-hidden="true">March 15, 2022 11:01PM</span><span class="by">Gale Stern:</span>
+    <div class="sheet-rolltemplate-atkdmg">
+        <div class="sheet-container sheet-atk">
+            <div class="sheet-result">
+                <div class="sheet-solo">
+                    <span><span class="inlinerollresult showtip tipsy-n-right" title="Rolling 1d20cs&gt;20 + 4[CHA] + 2[PROF] = (&lt;span class=&quot;basicdiceroll&quot;&gt;18&lt;/span&gt;)+4+2">24</span></span>
+                </div>
+            </div>
+            <div class="sheet-sublabel">
+                <span>120 feet</span>
+            </div>
+            <div class="sheet-label">
+                <span>Eldritch Blast <span>(+6)</span></span>
+            </div>
+            <div class="sheet-spelldesc-link">
+                <span><a href="https://app.roll20.net/campaigns/chatarchive/~-MsRlFGefypDB7tq13Uw%7Crepeating_attack_-MsRmUZOxZ2VgzZPlPpK_spelldesc_link">Show Spell Description</a></span>
+            </div>
+        </div>
+
+        <div class="sheet-container sheet-damagetemplate">
+            <div class="sheet-result">
+                <div class="sheet-solo">
+                    <span class="sheet-damage">
+                        <span class="inlinerollresult showtip tipsy-n-right fullfail" title="Rolling 1d10 = (&lt;span class=&quot;basicdiceroll critfail &quot;&gt;1&lt;/span&gt;)">1</span>
+                        =20
+                    </span>
+                    <span class="sheet-sublabel">Force</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="menu-MyFf52ikq6ksE-R4j8h" class="flyout"></div>
+</div>
+            
+            
+<div class="message general" data-messageid="-MyiUCIIh0yFG_e-FdIi">
+        <div class="sheet-rolltemplate-atkdmg">
+            <div class="sheet-container sheet-atk sheet-save">
+                <div class="sheet-savedc">
+                    <span class="sheet-rolltemplate-inline" data-i18n="difficulty-class-abv">DC</span><span class="sheet-rolltemplate-inline"><span class="inlinerollresult showtip tipsy-n-right" title="Rolling 14[SAVE] = 14">14</span></span>
+                </div>
+                <div class="sheet-label">
+                    <span class="sheet-rolltemplate-inline">Constitution</span> <span class="sheet-rolltemplate-inline" data-i18n="save">Save</span>
+                </div>
+            </div>
+
+            <div class="sheet-container sheet-damagetemplate">
+                <div class="sheet-result">
+                    <div class="sheet-solo">
+                        <span class="sheet-damage">
+                            <span class="inlinerollresult showtip tipsy-n-right" title="Rolling 2d8 = (&lt;span class=&quot;basicdiceroll&quot;&gt;7&lt;/span&gt;+&lt;span class=&quot;basicdiceroll&quot;&gt;4&lt;/span&gt;)">11</span>
+                        </span>
+                        <span class="sheet-sublabel">Thunder</span>
+                    </div>
+                </div>
+                <div class="sheet-sublabel">
+                    <span>Self (15-foot cube)</span>
+                </div>
+                <div class="sheet-label">
+                    <span>Thunderwave</span>
+                </div>
+                <div class="sheet-spelldesc-link">
+                    <span><a href="https://app.roll20.net/campaigns/chatarchive/~-MsRlFGefypDB7tq13Uw%7Crepeating_attack_-MyiSELZ4T9VrSzFQuel_spelldesc_link">Show Spell Description</a></span>
+                </div>
+            </div>
+        </div>
+        <div id="menu-MyiUCIIh0yFG_e-FdIi" class="flyout"></div>
+</div>
+
+
+<div class="message general" data-messageid="-N-zgAvKhDfsp2_mpZO1">
+    <div class="spacer"></div>
+    <div class="avatar" aria-hidden="true"><img src="https://files.d20.io/images/262993821/bjQAfAYZRCcH1wL0LJUtcg/med.jpg?1641256442"></div><span class="tstamp" aria-hidden="true">April 18, 2022 10:39PM</span><span class="by">Driron Narakas:</span>
+    <div class="sheet-rolltemplate-atkdmg">
+        <div class="sheet-container sheet-atk sheet-save">
+            <div class="sheet-savedc">
+                <span class="sheet-rolltemplate-inline" data-i18n="difficulty-class-abv">DC</span><span class="sheet-rolltemplate-inline"><span class="inlinerollresult showtip tipsy-n-right" title="Rolling 13[SAVE] = 13">13</span></span>
+            </div>
+            <div class="sheet-label">
+                <span class="sheet-rolltemplate-inline">Wisdom</span> <span class="sheet-rolltemplate-inline" data-i18n="save">Save</span>
+            </div>
+        </div>
+
+        <div class="sheet-container sheet-damagetemplate">
+            <div class="sheet-result">
+                <div class="sheet-solo">
+                    <span class="sheet-damage">
+                        <span class="inlinerollresult showtip tipsy-n-right" title="Rolling 1d4 = (&lt;span class=&quot;basicdiceroll&quot;&gt;2&lt;/span&gt;)">2</span>
+                    </span>
+                    <span class="sheet-sublabel">Psychic</span>
+                </div>
+            </div>
+            <div class="sheet-sublabel">
+                <span>60 feet</span>
+            </div>
+            <div class="sheet-label">
+                <span>Vicious Mockery</span>
+            </div>
+            <div class="sheet-spelldesc-link">
+                <span><a href="https://app.roll20.net/campaigns/chatarchive/~-MsXVMVZkKMtr3mPvqxG%7Crepeating_attack_-MyhUUaWJx7aTWKjlZCi_spelldesc_link">Show Spell Description</a></span>
+            </div>
+        </div>
+    </div>
+    <div id="menu-N-zgAvKhDfsp2_mpZO1" class="flyout"></div>
+</div>
+
+<div class="message general you" data-messageid="-N40A_oS-W7L1FaYgh6i">
+    <div class="sheet-rolltemplate-atkdmg">
+        <div class="sheet-container sheet-atk">
+            <div class="sheet-result">
+                <div class="sheet-solo">
+                    <span><span class="inlinerollresult showtip tipsy-n-right" title="Rolling 1d20cs&gt;20 + 3[INT] + 2[PROF] = (&lt;span class=&quot;basicdiceroll&quot;&gt;15&lt;/span&gt;)+3+2">20</span></span>
+                </div>
+            </div>
+            <div class="sheet-sublabel">
+                <span>120 feet</span>
+            </div>
+            <div class="sheet-label">
+                <span>Scorching Ray <span>(+5)</span></span>
+            </div>
+            <div class="sheet-charname">
+                <span>Sebak</span>
+            </div>
+            <div class="sheet-spelldesc-link">
+                <span><a href="https://app.roll20.net/campaigns/chatarchive/~-LeDdXGb-AOSD6lTXB0j%7Crepeating_attack_-LeDdXscmXprlVl5JcYM_spelldesc_link">Show Spell Description</a></span>
+            </div>
+        </div>
+
+        <div class="sheet-container sheet-damagetemplate">
+            <div class="sheet-result">
+                <div class="sheet-solo">
+                    <span class="sheet-damage">
+                        <span class="inlinerollresult showtip tipsy-n-right fullcrit" title="Rolling 2d6 = (&lt;span class=&quot;basicdiceroll critsuccess &quot;&gt;6&lt;/span&gt;+&lt;span class=&quot;basicdiceroll&quot;&gt;4&lt;/span&gt;)">10</span>
+                        =20
+                    </span>
+                    <span class="sheet-sublabel">Fire</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="menu-N40A_oS-W7L1FaYgh6i" class="flyout"></div>
+</div>
+
+
+<div class="message general" data-messageid="-N40Nug1pvc6y49Ra0Cz">
+    <div class="spacer"></div>
+    <div class="avatar" aria-hidden="true"><img src="https://files.d20.io/images/262993821/bjQAfAYZRCcH1wL0LJUtcg/med.jpg?1641256442"></div><span class="tstamp" aria-hidden="true">June 07, 2022 11:37PM</span><span class="by">Driron Narakas:</span>
+    <div class="sheet-rolltemplate-atkdmg">
+        <div class="sheet-container sheet-atk sheet-save">
+            <div class="sheet-savedc">
+                <span class="sheet-rolltemplate-inline" data-i18n="difficulty-class-abv">DC</span><span class="sheet-rolltemplate-inline"><span class="inlinerollresult showtip tipsy-n-right" title="Rolling 13[SAVE] = 13">13</span></span>
+            </div>
+            <div class="sheet-label">
+                <span class="sheet-rolltemplate-inline">Wisdom</span> <span class="sheet-rolltemplate-inline" data-i18n="save">Save</span>
+            </div>
+        </div>
+
+        =20
+        <div class="sheet-desc">
+            <span>
+                <span class="inlinerollresult showtip tipsy-n-right" title="Rolling (1*2)d6 = (&lt;span class=&quot;basicdiceroll&quot;&gt;4&lt;/span&gt;+&lt;span class=&quot;basicdiceroll&quot;&gt;4&lt;/span&gt;)">8</span>
+                =20
+            </span>
+            <span class="sheet-sublabel">Psychic</span>
+            <div class="sheet-label">
+                <span data-i18n="higher-lvl-cast">Higher Level Cast</span>
+            </div>
+        </div>
+        <div class="sheet-container sheet-damagetemplate">
+            <div class="sheet-result">
+                <div class="sheet-solo">
+                    <span class="sheet-damage">
+                        <span class="inlinerollresult showtip tipsy-n-right fullfail" title="Rolling 3d6 = (&lt;span class=&quot;basicdiceroll critfail &quot;&gt;1&lt;/span&gt;+&lt;span class=&quot;basicdiceroll&quot;&gt;3&lt;/span&gt;+&lt;span class=&quot;basicdiceroll critfail &quot;&gt;1&lt;/span&gt;)">5</span>
+                    </span>
+                    <span class="sheet-sublabel">Psychic</span>
+                </div>
+            </div>
+            <div class="sheet-sublabel">
+                <span>60 feet</span>
+            </div>
+            <div class="sheet-label">
+                <span>Dissonant Whispers</span>
+            </div>
+            <div class="sheet-spelldesc-link">
+                <span><a href="https://app.roll20.net/campaigns/chatarchive/~-MsXVMVZkKMtr3mPvqxG%7Crepeating_attack_-MyhUUaXUMW5FyfL8V4w_spelldesc_link">Show Spell Description</a></span>
+            </div>
+        </div>
+    </div>
+    <div id="menu-N40Nug1pvc6y49Ra0Cz" class="flyout"></div>
+</div>
+
+<div class="message private whisper" data-messageid="-NFQwkh6RFsPfs7c7gJo">
+                <div class="spacer"></div>
+                <div class="avatar" aria-hidden="true"><img src="https://app.roll20.net/users/avatar/2888066/30"></div><span class="tstamp" aria-hidden="true">October 27, 2022 8:17PM</span><span class="by">(To GM):</span>
+                <div class="sheet-rolltemplate-atkdmg">
+                    <div class="sheet-container sheet-atk">
+                        <div class="sheet-result">
+                            <div class="sheet-adv">
+                                <span><span class="inlinerollresult showtip tipsy-n-right" title="Rolling 1d20cs&gt;20 + 2[WIS] + 2[PROF] = (&lt;span class=&quot;basicdiceroll&quot;&gt;13&lt;/span&gt;)+2+2">17</span></span>
+                            </div>
+                            <div class="sheet-advspacer"></div>
+                            <div class="sheet-adv">
+                                <span><span class="inlinerollresult showtip tipsy-n-right" title="Rolling 1d20cs&gt;20 + 2[WIS] + 2[PROF] = (&lt;span class=&quot;basicdiceroll&quot;&gt;6&lt;/span&gt;)+2+2">10</span></span>
+                            </div>
+                        </div>
+                        <div class="sheet-sublabel">
+                            <span>120 feet</span>
+                        </div>
+                        <div class="sheet-label">
+                            <span>Guiding Bolt <span>(+4)</span></span>
+                        </div>
+                        <div class="sheet-charname">
+                            <span>Sahuagin Priestess</span>
+                        </div>
+                        <div class="sheet-spelldesc-link">
+                            <span><a href="https://app.roll20.net/campaigns/chatarchive/~-LcBV_qcaD2-jlbJSUxO%7Crepeating_attack_-LcBVdAAAd4VDbIsPmg6_spelldesc_link">Show Spell Description</a></span>
+                        </div>
+                    </div>
+
+                    <div class="sheet-container sheet-damagetemplate">
+                        <div class="sheet-result">
+                            <div class="sheet-solo">
+                                <span class="sheet-damage">
+                                    <span class="inlinerollresult showtip tipsy-n-right importantroll" title="Rolling 4d6 = (&lt;span class=&quot;basicdiceroll&quot;&gt;2&lt;/span&gt;+&lt;span class=&quot;basicdiceroll critsuccess &quot;&gt;6&lt;/span&gt;+&lt;span class=&quot;basicdiceroll critfail &quot;&gt;1&lt;/span&gt;+&lt;span class=&quot;basicdiceroll&quot;&gt;5&lt;/span&gt;)">14</span>
+                                    =20
+                                    =20
+                                    =20
+                                </span>
+                                <span class="sheet-sublabel">Radiant</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="menu-NFQwkh6RFsPfs7c7gJo" class="flyout"></div>
+            </div>
