@@ -19,15 +19,19 @@ public class MinerUtil {
 	public static final String DESCRIPTION = "desc";
 	public static final String EMOTE = "emote";
 	public static final String SPELLDESC = "sheet-spelldesc-link";
+	public static final String AUTO_HP_ROLL = "sheet-rolltemplate-mancerhproll";
+	public static final String NPC_ACTION = "sheet-rolltemplate-npcaction";
 	
 	public static final String TIMESTAMP = "tstamp";
 	public static final String SENDER = "by";
 	public static final String AVATAR_URL = "avatar";	
 	public static final String CONTENT_CONTAINER = "content";
+	public static final String IGNORED_USER = "(From HealthColors):";
 	
 	public static final String INLINE_ROLL_RESULT = "inlinerollresult";
 	public static final String LABEL = "sheet-label";
 	public static final String SHEET_DESCRIPTION = "sheet-desc";
+	public static final String SHEET_INFO = "sheet-info";
 	public static final String SHEET_SUB_LABEL = "sheet-sublabel";
 	public static final String SHEET_ATTACK = "sheet-atk";
 	public static final String SHEET_DAMAGE_TEMPLATE = "sheet-damagetemplate";
@@ -39,7 +43,7 @@ public class MinerUtil {
 	public static final String SPACE = " ";
 	public static final String EMPTY_STRING = "";
 	public static final String EQ = " = ";
-	
+		
 	public static MinerUtil getInstance() {
 		if(instance == null) {
 			synchronized(MinerUtil.class) {
@@ -52,7 +56,6 @@ public class MinerUtil {
 	}
 	
 	private MinerUtil() {
-	
 	}
 	
 	public static String cleanAttackText(String attack) {

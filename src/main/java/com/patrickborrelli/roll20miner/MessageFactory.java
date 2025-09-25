@@ -1,16 +1,38 @@
 package com.patrickborrelli.roll20miner;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jsoup.nodes.Element;
 import com.patrickborrelli.roll20miner.model.AttackMessage;
 import com.patrickborrelli.roll20miner.model.DamageMessage;
 import com.patrickborrelli.roll20miner.model.Message;
+import com.patrickborrelli.roll20miner.model.PrivateMessage;
+import com.patrickborrelli.roll20miner.model.SimpleRollMessage;
+import com.patrickborrelli.roll20miner.model.SpellAttackDamageMessage;
+import com.patrickborrelli.roll20miner.model.TextMessage;
+import com.patrickborrelli.roll20miner.model.TraitsMessage;
 import com.patrickborrelli.roll20miner.util.MinerUtil;
 
 public class MessageFactory {	
 	private static final Logger LOGGER = LogManager.getLogger(MessageFactory.class);
 	private static int messageIndex = 0;
+	
+	/**
+	 * Responsible for mapping a name to an avatar url
+	 * to facilitate cases where one or the other are not 
+	 * included in the incoming element.
+	 */
+	private static Map<String, String> avatarUrlToNameMapping;	
+	private static Map<String, String> nameToAvatarUrlMapping;
+	
+	public MessageFactory() {
+		avatarUrlToNameMapping = new HashMap<>();
+		nameToAvatarUrlMapping = new HashMap<>();
+	}
+	
 	
 	public Message createMessageObject(Element element) {
 		Message message = null;
@@ -23,68 +45,48 @@ public class MessageFactory {
 		avatarUrl = retrieveAvatar(element);
 		sender = retrieveSender(element);
 		
+		//add to mappings if we have the data:
+		if(sender != null && !sender.isEmpty() && avatarUrl != null && !avatarUrl.isEmpty()) {
+			avatarUrlToNameMapping.put(avatarUrl, sender);
+			nameToAvatarUrlMapping.put(sender, avatarUrl);
+		}
+				
+		//handle private message sender:
+		if( (sender == null || sender.isEmpty() || sender.contains("To")) && 
+			(avatarUrl != null && !avatarUrl.isEmpty())) {
+			String realSender = avatarUrlToNameMapping.get(avatarUrl);
+			if(realSender != null) {
+				sender = realSender;
+			}
+		}
+		
+		
+		
+		//TODO: determine sender based on avatar lookup for private messages
 		//TODO: build avatarLookup map/utilize if values are missing
 		
 		//determine the type of message for proper factory creation:
 		if(element.getElementsByClass(MinerUtil.ATTACK).first() != null) {
 			message = new AttackMessage(avatarUrl, timestamp, sender, messageIndex++, element);
 		} else if(element.getElementsByClass(MinerUtil.ATTACK_DMG).first() != null) {
-			message = new DamageMessage(avatarUrl, timestamp, sender, messageIndex++, element);
-		}
-		
-		
-		return message;
-	}
-
-	/**
-	private Message createTextMessage(Element element) {
-		Message message = new TextMessage();
-		populateGenericMessage(message, element);
-		//String text = retrieveMessageText(element);
-		
-		if(text != null && !text.isEmpty()) {
-			((TextMessage)message).setMessageContent(text);
+			if(element.getElementsByClass(MinerUtil.SPELLDESC).first() != null) {
+				message = new SpellAttackDamageMessage(avatarUrl, timestamp, sender, messageIndex++, element);
+			} else {
+				message = new DamageMessage(avatarUrl, timestamp, sender, messageIndex++, element);
+			}
+		} else if(element.getElementsByClass(MinerUtil.SIMPLE_ROLL).first() != null) {
+			message = new SimpleRollMessage(avatarUrl, timestamp, sender, messageIndex++, element);
+		} else if(element.getElementsByClass(MinerUtil.TRAIT).first() != null) {
+			message = new TraitsMessage(avatarUrl, timestamp, sender, messageIndex++, element);
+		} else if(element.getElementsByClass(MinerUtil.PRIVATE_MSG).first() != null) {
+			message = new PrivateMessage(avatarUrl, timestamp, sender, messageIndex++, element);
 		} else {
-			LOGGER.warn("Current message does not have associated text.");
-		}
-		
-		return message;
-	}
-
-	private Message createAttackMessage(Element element) {
-		Message message = new TextMessage();
-		populateGenericMessage(message, element);
-		
-		return message;
-	}
-	
-	private void populateGenericMessage(Message message, Element element) {
-		String timestamp;
-		String sender;
-		String avatarUrl;
-		
-		timestamp = retrieveTimestamp(element);
-		if(timestamp != null && !timestamp.isEmpty()) {
-			message.setTimestamp(timestamp);
-		} else {
-			LOGGER.warn("Current message does not have a recorded timestamp.");
-		}
-		
-		sender = retrieveSender(element);
-		if(sender != null && !sender.isEmpty()) {
-			message.setBy(sender);
-		} else {
-			LOGGER.warn("Current message does not have a recorded sender.");
-		}
-		
-		avatarUrl = retrieveAvatar(element);
-		if(avatarUrl != null && !avatarUrl.isEmpty()) {
-			message.setAvatarUrl(avatarUrl);
-		} else {
-			LOGGER.warn("Current message does not have an associated avatar.");
+			//assume it is a regular old text message:
+			message = new TextMessage(avatarUrl, timestamp, sender, messageIndex++, element);
 		}		
+		
+		return message;
 	}
-		**/
 		
 	private String retrieveTimestamp(Element element) {
 		String result = null;

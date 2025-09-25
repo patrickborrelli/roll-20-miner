@@ -1,1 +1,12 @@
-C:\local-repository\roll-20-miner\src\main\java\com\patrickborrelli\roll20miner\Roll20LogMiner.java
+D:\local-repository\roll-20-miner\src\main\java\com\patrickborrelli\roll20miner\model\AttackMessage.java
+D:\local-repository\roll-20-miner\src\main\java\com\patrickborrelli\roll20miner\model\PrivateMessage.java
+D:\local-repository\roll-20-miner\src\main\java\com\patrickborrelli\roll20miner\model\SimpleRollMessage.java
+D:\local-repository\roll-20-miner\src\main\java\com\patrickborrelli\roll20miner\util\MinerUtil.java
+D:\local-repository\roll-20-miner\src\main\java\com\patrickborrelli\roll20miner\model\DamageMessage.java
+D:\local-repository\roll-20-miner\src\main\java\com\patrickborrelli\roll20miner\MessageFactory.java
+D:\local-repository\roll-20-miner\src\main\java\com\patrickborrelli\roll20miner\model\SpellAttackDamageMessage.java
+D:\local-repository\roll-20-miner\src\main\java\com\patrickborrelli\roll20miner\model\TextMessage.java
+D:\local-repository\roll-20-miner\src\main\java\com\patrickborrelli\roll20miner\model\Message.java
+D:\local-repository\roll-20-miner\src\main\java\com\patrickborrelli\roll20miner\model\TraitsMessage.java
+D:\local-repository\roll-20-miner\src\main\java\com\patrickborrelli\roll20miner\LogMinerParser.java
+D:\local-repository\roll-20-miner\src\main\java\com\patrickborrelli\roll20miner\Roll20LogMiner.java

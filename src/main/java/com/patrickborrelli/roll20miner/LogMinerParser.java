@@ -1,10 +1,7 @@
 package com.patrickborrelli.roll20miner;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jsoup.nodes.Element;
@@ -26,20 +23,6 @@ public class LogMinerParser {
 	private static final Logger LOGGER = LogManager.getLogger(LogMinerParser.class);
 	
 	private MessageFactory factory = new MessageFactory();
-	
-	/**
-	 * Responsible for mapping a name to an avatar url
-	 * to facilitate cases where one or the other are not 
-	 * included in the incoming element.
-	 */
-	private Map<String, String> avatarUrlMapping;
-	
-	/**
-	 * Default constructor initializes any necessary private members.
-	 */
-	public LogMinerParser() {
-		avatarUrlMapping = new HashMap<>();
-	}
 
 	/**
 	 * Responsible for parsing of the collection of Elements 
@@ -55,30 +38,40 @@ public class LogMinerParser {
 		Element combine = null;
 		
 		for(Element currElement : contents) {
-			boolean isTimestamp = currElement.getElementsByClass(MinerUtil.TIMESTAMP).first() != null;
-			boolean isDesc = currElement.getElementsByClass(MinerUtil.DESCRIPTION).first() != null;
-			boolean isEmote = currElement.getElementsByClass(MinerUtil.EMOTE).first() != null;
-
-			//if the current element has no timestamp, it must be a part of a 
-			//multi-element message or it is a description or emote message:
-			if(!isTimestamp) { 
-				if(isDesc || isEmote) {
-					//these will only ever be single line messages, but neither has a timestamp,
-					//so push them directly to the parsed messages after pushing the working elements:
+			//for ignored message types, do nothing:
+			if( currElement.getElementsByClass(MinerUtil.AUTO_HP_ROLL).first() == null &&
+				currElement.getElementsByClass(MinerUtil.NPC_ACTION).first() == null) {	
+				
+				boolean isTimestamp = currElement.getElementsByClass(MinerUtil.TIMESTAMP).first() != null;
+				boolean isDesc = currElement.getElementsByClass(MinerUtil.DESCRIPTION).first() != null;
+				boolean isEmote = currElement.getElementsByClass(MinerUtil.EMOTE).first() != null;
+	
+				//if the current element has no timestamp, it must be a part of a 
+				//multi-element message or it is a description or emote message:
+				if(!isTimestamp) { 
+					if(isDesc || isEmote) {
+						//these will only ever be single line messages, but neither has a timestamp,
+						//so push them directly to the parsed messages after pushing the working elements:
+						combine = combineElements(workingElements);
+						if(combine != null)  parsedElements.add(combine);
+						workingElements.clear();
+						parsedElements.add(currElement);
+					} else {
+						workingElements.add(currElement); 
+					}
+				} else {
+					//found a timestamp, so this is the beginning or entirety of a new message.
+					//send any previous working elements collection for combining:
 					combine = combineElements(workingElements);
 					if(combine != null)  parsedElements.add(combine);
 					workingElements.clear();
-					parsedElements.add(currElement);
-				} else {
-					workingElements.add(currElement); 
+					
+					//do not bother with messages from ignored users:
+					Element user = currElement.getElementsByClass(MinerUtil.SENDER).first();
+					if(user == null || (user != null && !user.text().contains(MinerUtil.IGNORED_USER))) {
+						workingElements.add(currElement);
+					}
 				}
-			} else {
-				//found a timestamp, so this is the beginning or entirety of a new message.
-				//send any previous working elements collection for combining:
-				combine = combineElements(workingElements);
-				if(combine != null)  parsedElements.add(combine);
-				workingElements.clear();
-				workingElements.add(currElement);				
 			}
 		}		
 		//resolve any remaining elements in the working collection:

@@ -8,7 +8,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.patrickborrelli.roll20miner.model.Message;
@@ -40,9 +39,10 @@ public class Roll20LogMiner {
 		} else {
 			messages = parser.parseElements(content.get(0).getElementsByClass(MinerUtil.MESSAGE));
 		}
-		
-		
-		//TODO: write messages out to console and file system.
+				
+		for(Message message : messages) {
+			LOGGER.info(message.toString());
+		}
 	}
 }
 
