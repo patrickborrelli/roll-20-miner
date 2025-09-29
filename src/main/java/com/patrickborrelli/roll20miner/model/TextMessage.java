@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper=true)
 public class TextMessage extends Message {
-
+	
 	private String messageContent;
 	
 	public TextMessage(String avatarUrl, String timestamp, String author, int messageIndex, Element message) {
@@ -24,5 +24,13 @@ public class TextMessage extends Message {
 	public String toDisplayString() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public String toCsvString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append(super.toCsvString());
+		builder.append(csvEscape(messageContent));	
+		return builder.toString();
 	}
 }

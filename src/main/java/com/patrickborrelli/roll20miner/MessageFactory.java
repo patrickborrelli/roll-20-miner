@@ -39,18 +39,13 @@ public class MessageFactory {
 		String avatarUrl = null;
 		String timestamp = null;
 		String sender = null;
+		LOGGER.debug("Creating object from element: " + element.toString());
 		
 		//first attempt to extract common elements:
 		timestamp = retrieveTimestamp(element);
 		avatarUrl = retrieveAvatar(element);
 		sender = retrieveSender(element);
 		
-		//add to mappings if we have the data:
-		if(sender != null && !sender.isEmpty() && avatarUrl != null && !avatarUrl.isEmpty()) {
-			avatarUrlToNameMapping.put(avatarUrl, sender);
-			nameToAvatarUrlMapping.put(sender, avatarUrl);
-		}
-				
 		//handle private message sender:
 		if( (sender == null || sender.isEmpty() || sender.contains("To")) && 
 			(avatarUrl != null && !avatarUrl.isEmpty())) {
@@ -58,13 +53,14 @@ public class MessageFactory {
 			if(realSender != null) {
 				sender = realSender;
 			}
-		}
-		
-		
-		
-		//TODO: determine sender based on avatar lookup for private messages
-		//TODO: build avatarLookup map/utilize if values are missing
-		
+		} else {
+			//add to mappings if we have the data:
+			if(sender != null && !sender.isEmpty() && avatarUrl != null && !avatarUrl.isEmpty()) {
+				avatarUrlToNameMapping.put(avatarUrl, sender);
+				nameToAvatarUrlMapping.put(sender, avatarUrl);
+			}
+		}		
+				
 		//determine the type of message for proper factory creation:
 		if(element.getElementsByClass(MinerUtil.ATTACK).first() != null) {
 			message = new AttackMessage(avatarUrl, timestamp, sender, messageIndex++, element);

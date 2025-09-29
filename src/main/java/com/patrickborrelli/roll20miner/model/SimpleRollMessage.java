@@ -60,4 +60,13 @@ public class SimpleRollMessage extends Message {
 		return null;
 	}
 
+	@Override
+	public String toCsvString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append(super.toCsvString());
+		if(rolls.size() > 0) builder.append(csvEscape(rolls.get(0))).append(" - ");	
+		if(sheetLabels.size() > 0) builder.append(csvEscape(sheetLabels.get(0)));	
+		return builder.toString();
+	}
+
 }

@@ -74,4 +74,10 @@ public class SpellAttackDamageMessage extends Message {
 		return null;
 	}
 
+	@Override
+	public String toCsvString() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

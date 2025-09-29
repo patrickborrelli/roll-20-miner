@@ -53,4 +53,15 @@ public class TraitsMessage extends Message {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public String toCsvString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append(super.toCsvString());
+		
+		if(rowHeaders.size() > 0) builder.append(csvEscape(getRowHeaders().get(0)));		
+		if(rowSubheaders.size() > 0) builder.append(csvEscape(getRowSubheaders().get(0)));		
+		if(rows.size() > 0) builder.append(csvEscape(getRows().get(0)));
+		return builder.toString();
+	}
 }

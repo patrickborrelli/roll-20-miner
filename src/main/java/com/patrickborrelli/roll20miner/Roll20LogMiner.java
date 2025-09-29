@@ -2,6 +2,7 @@ package com.patrickborrelli.roll20miner;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -23,9 +24,9 @@ public class Roll20LogMiner {
 		List<Message> messages = null;
 		LogMinerParser parser = new LogMinerParser();
 		
-		if(args == null || args.length != 1) {
+		if(args == null || (args.length != 1  && args.length != 3)) {
 			//TODO: print out usage text and terminate
-			LOGGER.error("Usage:  java Roll20LogMiner <file containing chat log>");
+			LOGGER.error("Usage:  java Roll20LogMiner <file containing chat log> [<output file> <CSV||TXT>]");
 			System.exit(1);
 		} 		
 		
@@ -40,9 +41,15 @@ public class Roll20LogMiner {
 			messages = parser.parseElements(content.get(0).getElementsByClass(MinerUtil.MESSAGE));
 		}
 				
+		//for the moment, assume we are dealing with default situation (no optionals provided)
+		File output = new File("output.csv");		
+		PrintWriter writer = new PrintWriter(output);	    
+	    		
 		for(Message message : messages) {
+			writer.println(message.toCsvString());
 			LOGGER.info(message.toString());
 		}
+		writer.close();
 	}
 }
 

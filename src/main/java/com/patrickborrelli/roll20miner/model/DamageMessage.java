@@ -87,4 +87,10 @@ public class DamageMessage extends Message {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public String toCsvString() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

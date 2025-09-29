@@ -1,5 +1,7 @@
 package com.patrickborrelli.roll20miner.model;
 
+import com.patrickborrelli.roll20miner.util.MinerUtil;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -20,4 +22,27 @@ public abstract class Message {
 	}
 	
 	public abstract String toDisplayString();
+	
+	public String toCsvString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append(csvEscape(getTimestamp()));
+		builder.append(MinerUtil.COMMA);
+		builder.append(csvEscape(getAuthor()));
+		builder.append(MinerUtil.COMMA);		
+		return builder.toString();
+	}
+	
+	protected String csvEscape(String toEscape) {
+		if(toEscape == null || toEscape.isEmpty()) {
+	      return toEscape;
+	    }
+
+	    StringBuilder builder = new StringBuilder();
+
+	    builder.append(MinerUtil.QUOTE);
+	    builder.append(toEscape.replaceAll(MinerUtil.QUOTE, MinerUtil.DOUBLE_QUOTE));
+	    builder.append(MinerUtil.QUOTE);
+
+	    return builder.toString();
+	}
 }

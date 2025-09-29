@@ -43,6 +43,9 @@ public class MinerUtil {
 	public static final String SPACE = " ";
 	public static final String EMPTY_STRING = "";
 	public static final String EQ = " = ";
+	public static final String QUOTE = "\"";
+	public static final String DOUBLE_QUOTE = "\"\"";
+	public static final String COMMA = ",";
 		
 	public static MinerUtil getInstance() {
 		if(instance == null) {

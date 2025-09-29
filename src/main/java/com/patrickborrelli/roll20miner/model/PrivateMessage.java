@@ -25,7 +25,7 @@ public class PrivateMessage extends Message {
 		
 		for(Element privateMsg : privates) {			
 			Element sentTo = privateMsg.getElementsByClass(MinerUtil.SENDER).first();
-			deliveredTo = sentTo.ownText();
+			deliveredTo = sentTo.ownText().replace("(To ", "").replace("):", "");
 			
 			messageText = privateMsg.ownText();
 		}
@@ -36,5 +36,14 @@ public class PrivateMessage extends Message {
 	public String toDisplayString() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public String toCsvString() {
+		StringBuilder builder = new StringBuilder();
+		String messageContent = "[ whispered to " + deliveredTo + " : " + messageText + "]";
+		builder.append(super.toCsvString());
+		builder.append(csvEscape(messageContent));	
+		return builder.toString();
 	}
 }
