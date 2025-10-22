@@ -7,9 +7,9 @@ package com.patrickborrelli.roll20miner.util;
  */
 public class MinerUtil {
 
-	private static volatile MinerUtil instance;	
-	
-	//Message Type determination:
+	private static volatile MinerUtil instance;
+
+	// Message Type determination:
 	public static final String ATTACK = "sheet-rolltemplate-atk";
 	public static final String ATTACK_DMG = "sheet-rolltemplate-atkdmg";
 	public static final String TRAIT = "sheet-rolltemplate-traits";
@@ -21,13 +21,13 @@ public class MinerUtil {
 	public static final String SPELLDESC = "sheet-spelldesc-link";
 	public static final String AUTO_HP_ROLL = "sheet-rolltemplate-mancerhproll";
 	public static final String NPC_ACTION = "sheet-rolltemplate-npcaction";
-	
+
 	public static final String TIMESTAMP = "tstamp";
 	public static final String SENDER = "by";
-	public static final String AVATAR_URL = "avatar";	
+	public static final String AVATAR_URL = "avatar";
 	public static final String CONTENT_CONTAINER = "content";
 	public static final String IGNORED_USER = "(From HealthColors):";
-	
+
 	public static final String INLINE_ROLL_RESULT = "inlinerollresult";
 	public static final String LABEL = "sheet-label";
 	public static final String SHEET_DESCRIPTION = "sheet-desc";
@@ -38,31 +38,34 @@ public class MinerUtil {
 	public static final String SHEET_DAMAGE = "sheet-damage";
 	public static final String SHEET_HEADER = "sheet-header";
 	public static final String SHEET_SUBHEADER = "sheet-subheader";
-	
-	//generic constants
+
+	public static final String EMOTE_MESSAGE = "em";
+
+	// generic constants
 	public static final String SPACE = " ";
 	public static final String EMPTY_STRING = "";
 	public static final String EQ = " = ";
 	public static final String QUOTE = "\"";
 	public static final String DOUBLE_QUOTE = "\"\"";
 	public static final String COMMA = ",";
-		
+
 	public static MinerUtil getInstance() {
-		if(instance == null) {
-			synchronized(MinerUtil.class) {
-				if(instance == null) {
+		if (instance == null) {
+			synchronized (MinerUtil.class) {
+				if (instance == null) {
 					instance = new MinerUtil();
 				}
-			}			
+			}
 		}
 		return instance;
 	}
-	
+
 	private MinerUtil() {
 	}
-	
+
 	public static String cleanAttackText(String attack) {
-		//utility method to eliminate known bad formatting in Roll20 chat log messages:		
-		return attack.replace("<span class=\"basicdiceroll\">", MinerUtil.EMPTY_STRING).replace("</span>", MinerUtil.EMPTY_STRING).replace("cs>20", MinerUtil.EMPTY_STRING);
+		// utility method to eliminate known bad formatting in Roll20 chat log messages:
+		return attack.replace("<span class=\"basicdiceroll\">", MinerUtil.EMPTY_STRING)
+				.replace("</span>", MinerUtil.EMPTY_STRING).replace("cs>20", MinerUtil.EMPTY_STRING);
 	}
 }
