@@ -23,7 +23,8 @@ public class TextMessage extends Message {
 		super(avatarUrl, timestamp, author, messageIndex);
 
 		if (message.getElementsByTag(MinerUtil.EMOTE_MESSAGE).first() != null) {
-			messageContent = message.getElementsByTag(MinerUtil.EMOTE_MESSAGE).first().ownText();
+			messageContent = message.getElementsByTag(MinerUtil.EMOTE_MESSAGE).first().ownText() + 
+					MinerUtil.SPACE + message.ownText();
 		} else {
 			if (message.ownText() != null && !message.ownText().isEmpty()) {
 				messageContent = message.ownText();

@@ -25,6 +25,8 @@ public abstract class Message {
 	
 	public String toCsvString() {
 		StringBuilder builder = new StringBuilder();
+		builder.append(getMessageIndex());
+		builder.append(MinerUtil.COMMA); 
 		builder.append(csvEscape(getTimestamp()));
 		builder.append(MinerUtil.COMMA);
 		builder.append(csvEscape(getAuthor()));
