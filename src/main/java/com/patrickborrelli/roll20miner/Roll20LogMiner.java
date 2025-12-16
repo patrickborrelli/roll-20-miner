@@ -41,7 +41,7 @@ public class Roll20LogMiner {
 			messages = parser.parseElements(content.get(0).getElementsByClass(MinerUtil.MESSAGE));
 		}
 				
-		//for the moment, assume we are dealing with default situation (no optionals provided)
+		//for the moment, assume we are dealing with default situation (no optional arguments provided)
 		File output = new File("output.csv");		
 		PrintWriter writer = new PrintWriter(output);	    
 	    		

@@ -23,6 +23,7 @@ public class LogMinerParser {
 	private static final Logger LOGGER = LogManager.getLogger(LogMinerParser.class);
 	
 	private MessageFactory factory = new MessageFactory();
+	private String previousTimestamp;
 
 	/**
 	 * Responsible for parsing of the collection of Elements 
@@ -51,7 +52,11 @@ public class LogMinerParser {
 				if(!isTimestamp) { 
 					if(isDesc || isEmote) {
 						//these will only ever be single line messages, but neither has a timestamp,
-						//so push them directly to the parsed messages after pushing the working elements:
+						//so add the previous timestamp and push them directly to the parsed 
+						//messages after pushing the working elements:
+						Element currentDiv = currElement.select("div").first();
+						currentDiv.appendElement("span").addClass("tstamp").text(previousTimestamp);
+						
 						combine = combineElements(workingElements);
 						if(combine != null)  parsedElements.add(combine);
 						workingElements.clear();
@@ -60,6 +65,8 @@ public class LogMinerParser {
 						workingElements.add(currElement); 
 					}
 				} else {
+					previousTimestamp = currElement.getElementsByClass(MinerUtil.TIMESTAMP).first().text();
+					
 					//found a timestamp, so this is the beginning or entirety of a new message.
 					//send any previous working elements collection for combining:
 					combine = combineElements(workingElements);
@@ -83,7 +90,7 @@ public class LogMinerParser {
 			result.add(factory.createMessageObject(nextElement));
 		}
 		
-		return result;
+  		return result;
 	}
 
 	private Element combineElements(Elements workingElements) {
