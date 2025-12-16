@@ -34,6 +34,18 @@ public abstract class Message {
 		return builder.toString();
 	}
 	
+	public String toCsvString(String label) {
+		StringBuilder builder = new StringBuilder();
+		builder.append(getMessageIndex());
+		builder.append(MinerUtil.COMMA); 
+		builder.append(csvEscape(getTimestamp()));
+		builder.append(MinerUtil.COMMA);
+		builder.append(csvEscape(getAuthor()));
+		builder.append(" - ").append(label);
+		builder.append(MinerUtil.COMMA);		
+		return builder.toString();
+	}
+	
 	protected String csvEscape(String toEscape) {
 		if(toEscape == null || toEscape.isEmpty()) {
 	      return toEscape;

@@ -57,7 +57,16 @@ public class AttackMessage extends Message {
 
 	@Override
 	public String toCsvString() {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuilder builder = new StringBuilder();
+		builder.append(super.toCsvString("Attack"));
+		
+		for(int i = 0; i < attackRolls.size(); i++) {
+			builder.append(attackRolls.get(i) + MinerUtil.LINEFEED);
+			if(sheetLabels.size() > i) {
+				builder.append(sheetLabels.get(i) + MinerUtil.LINEFEED);		
+			}
+		}
+		
+		return builder.toString();
 	}
 }

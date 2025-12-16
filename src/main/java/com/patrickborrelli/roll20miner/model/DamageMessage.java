@@ -90,7 +90,22 @@ public class DamageMessage extends Message {
 
 	@Override
 	public String toCsvString() {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuilder builder = new StringBuilder();
+		builder.append(super.toCsvString("AttackDamage"));
+		
+		for(int i = 0; i < attackRolls.size(); i++) {
+			builder.append(attackRolls.get(i) + MinerUtil.LINEFEED);
+			if(sheetLabels.size() > i) {
+				builder.append(sheetLabels.get(i) + MinerUtil.LINEFEED);		
+			}
+			if(damageRolls.size() > i) {
+				builder.append(damageRolls.get(i) + MinerUtil.LINEFEED);
+			}
+			if(sheetSubDamages.size() > i) {
+				builder.append(sheetSubDamages.get(i) + MinerUtil.LINEFEED);
+			}
+		}
+		
+		return builder.toString();
 	}
 }
