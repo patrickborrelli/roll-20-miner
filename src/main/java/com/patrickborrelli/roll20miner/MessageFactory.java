@@ -102,7 +102,10 @@ public class MessageFactory {
 		if(first != null) { 
 			LOGGER.debug(first.text());
 			result = first.text();
-		}		
+		}	
+		if(result.equalsIgnoreCase("DM (GM):")) {
+			result = "DM:";
+		}
 		return result;
 	}
 	

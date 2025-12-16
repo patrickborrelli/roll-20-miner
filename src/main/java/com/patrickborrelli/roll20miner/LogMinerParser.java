@@ -48,15 +48,32 @@ public class LogMinerParser {
 				boolean isEmote = currElement.getElementsByClass(MinerUtil.EMOTE).first() != null;
 	
 				//if the current element has no timestamp, it must be a part of a 
-				//multi-element message or it is a description or emote message:
+				//multi-element message, or it is a description/emote message:
 				if(!isTimestamp) { 
-					if(isDesc || isEmote) {
-						//these will only ever be single line messages, but neither has a timestamp,
-						//so add the previous timestamp and push them directly to the parsed 
-						//messages after pushing the working elements:
+					if(isDesc) {
+						/**
+						 * descriptions are single line messages without a timestamp or author,
+						 * mark the author as DM Description, add the previous timestamp.
+						 * combine and push any working elements, then push this current element.
+						 */
 						Element currentDiv = currElement.select("div").first();
-						currentDiv.appendElement("span").addClass("tstamp").text(previousTimestamp);
-						
+						currentDiv.appendElement("span").addClass(MinerUtil.TIMESTAMP).text(previousTimestamp);
+						currentDiv.appendElement("span").addClass(MinerUtil.SENDER).text("DM - Description");
+												
+						combine = combineElements(workingElements);
+						if(combine != null)  parsedElements.add(combine);
+						workingElements.clear();
+						parsedElements.add(currElement);
+					} else if(isEmote) {
+						/**
+						 * emotes are single line messages without a timestamp or author,
+						 * mark the author as Emote, add the previous timestamp.
+						 * combine and push any working elements, then push this current element.
+						 */
+						Element currentDiv = currElement.select("div").first();
+						currentDiv.appendElement("span").addClass(MinerUtil.TIMESTAMP).text(previousTimestamp);
+						currentDiv.appendElement("span").addClass(MinerUtil.SENDER).text("Emote");
+												
 						combine = combineElements(workingElements);
 						if(combine != null)  parsedElements.add(combine);
 						workingElements.clear();
