@@ -3,10 +3,9 @@ package com.patrickborrelli.roll20miner.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jsoup.nodes.Element;
-import org.jsoup.nodes.TextNode;
-import org.jsoup.select.Elements;
-
 import com.patrickborrelli.roll20miner.util.MinerUtil;
 
 import lombok.Data;
@@ -18,68 +17,122 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper=true)
 public class DamageMessage extends Message {
 	
-	private List<String> attackRolls;
-	private List<String> damageRolls;
-	private List<String> sheetLabels;
-	private List<String> sheetSubDamages;
+	private static final Logger LOGGER = LogManager.getLogger(DamageMessage.class);
+	private List<String> messageContents;
 	
 	public DamageMessage(String avatarUrl, String timestamp, String author, int messageIndex, Element damage) {
 		super(avatarUrl, timestamp, author, messageIndex);  
 		
-		attackRolls = new ArrayList<>();
-		sheetLabels = new ArrayList<>();
-		damageRolls = new ArrayList<>();
-		sheetSubDamages = new ArrayList<>();
-		List<TextNode> nodes = new ArrayList<>();		
 		StringBuilder builder = null;
-		
 		List<Element> damages = damage.getElementsByClass(MinerUtil.ATTACK_DMG);
+		messageContents = new ArrayList<>();	
 		
 		for(Element line : damages) {
-			//drop any empty blocks:
-			if(line.childrenSize() != 0) {			
+			if(line.childrenSize() != 0) {
 				builder = new StringBuilder();
 				
 				Element sheetAttack = line.getElementsByClass(MinerUtil.SHEET_ATTACK).first();
+				Element sheetDmg = line.getElementsByClass(MinerUtil.SHEET_DAMAGE_TEMPLATE).first();
+				Element sheetDescription = line.getElementsByClass(MinerUtil.SHEET_DESCRIPTION).first();
 				
 				if(sheetAttack != null) {
-					Element attackText = sheetAttack.getElementsByClass(MinerUtil.INLINE_ROLL_RESULT).first();
-					builder.append(attackText.attr("title")).append(MinerUtil.EQ).append(attackText.ownText());
-					
-					attackRolls.add(MinerUtil.cleanAttackText(builder.toString()));
-					
-					builder = new StringBuilder();
-					
-					Element labelText = sheetAttack.getElementsByClass(MinerUtil.LABEL).first();
-					nodes = labelText.children().first().textNodes();	
-					for(TextNode node : nodes) {
-						builder.append(node.text()).append(" ");
-					}				 
-					
-					sheetLabels.add(builder.toString().trim());			
-				}
-				
-				Elements sheetDescriptions = line.getElementsByClass(MinerUtil.SHEET_DESCRIPTION);
-				for(Element desc : sheetDescriptions) {
-					//ignore sheet-info tags:
-					if(!desc.hasClass(MinerUtil.SHEET_INFO)) {
-						builder = new StringBuilder();
-						Element subDamageText = desc.getElementsByClass(MinerUtil.INLINE_ROLL_RESULT).first();
-						Element subLabel = desc.getElementsByClass(MinerUtil.SHEET_SUB_LABEL).first();
-						builder.append(subLabel.ownText()).append(MinerUtil.SPACE).append(subDamageText.attr("title")).append(MinerUtil.EQ).append(subDamageText.ownText());
-						sheetSubDamages.add(builder.toString().trim());
+					if(sheetAttack.hasClass(MinerUtil.SHEET_SAVE)) {
+						builder.append(sheetAttack.getElementsByClass(MinerUtil.LABEL).get(0).text());
+						builder.append(MinerUtil.SPACE);
+						builder.append(sheetAttack.getElementsByClass(MinerUtil.SHEET_SAVE_DC).get(0).text());
+						builder.append(MinerUtil.SPACE);
+						if(!sheetAttack.getElementsByClass(MinerUtil.SHEET_SUB_LABEL).isEmpty()) {
+							builder.append(sheetAttack.getElementsByClass(MinerUtil.SHEET_SUB_LABEL).get(0).text());
+							builder.append(MinerUtil.SPACE);
+						}
+					} else {
+						Element soloRoll = sheetAttack.getElementsByClass(MinerUtil.SHEET_SOLO).first();
+						if(soloRoll != null) {
+							Element rollText = soloRoll.getElementsByClass(MinerUtil.INLINE_ROLL_RESULT).first();
+							Element labelText = sheetAttack.getElementsByClass(MinerUtil.LABEL).first();
+							//Element rangeText = sheetAttack.getElementsByClass(MinerUtil.SHEET_SUB_LABEL).first();
+									
+							builder.append("Using ").append(labelText.text());		
+							builder.append(" to hit = ").append(rollText.ownText());
+						} else {
+							//must be advantage roll
+							Element firstRoll = sheetAttack.getElementsByClass(MinerUtil.SHEET_ADV).first().getElementsByClass(MinerUtil.INLINE_ROLL_RESULT).first();
+							Element secondRoll = sheetAttack.getElementsByClass(MinerUtil.SHEET_ADV).get(1).getElementsByClass(MinerUtil.INLINE_ROLL_RESULT).first();
+							Element labelText = sheetAttack.getElementsByClass(MinerUtil.LABEL).first();
+							//Element rangeText = sheetAttack.getElementsByClass(MinerUtil.SHEET_SUB_LABEL).first();
+							
+							builder.append("Using ").append(labelText.text());
+							if(isAdvantage(sheetAttack.getElementsByClass(MinerUtil.SHEET_ADV).first(), sheetAttack.getElementsByClass(MinerUtil.SHEET_ADV).get(1))) {
+								builder.append(" to hit, with advantage = ").append(firstRoll.ownText()).append("/").append(secondRoll.ownText());
+							} else {
+								builder.append(" to hit, with disadvantage = ").append(firstRoll.ownText()).append("/").append(secondRoll.ownText());
+							}												
+						}
 					}
 				}
 				
-				builder = new StringBuilder();
-				
-				Element sheetDamageBlock = line.getElementsByClass(MinerUtil.SHEET_DAMAGE_TEMPLATE).first();
-				Element sheetDamage = sheetDamageBlock.getElementsByClass(MinerUtil.INLINE_ROLL_RESULT).first();
-				Element sheetSubLabel = sheetDamageBlock.getElementsByClass(MinerUtil.SHEET_SUB_LABEL).first();
-				builder.append(sheetDamage.attr("title")).append(MinerUtil.EQ).append(sheetDamage.ownText()).append(MinerUtil.SPACE).append(sheetSubLabel.ownText());
-				damageRolls.add(MinerUtil.cleanAttackText(builder.toString().trim()));			
+				if(sheetDescription != null) {
+					if(sheetDescription.hasClass(MinerUtil.SHEET_INFO)) {
+						builder.append(sheetDescription.text()).append(MinerUtil.SPACE);
+					} else {
+						Element rollText = sheetDescription.getElementsByClass(MinerUtil.INLINE_ROLL_RESULT).first();
+						Element labelText = sheetDescription.getElementsByClass(MinerUtil.LABEL).first();
+						Element sublabelText = sheetDescription.getElementsByClass(MinerUtil.SHEET_SUB_LABEL).first();
+						
+						if(labelText != null) {
+							builder.append(labelText.text()).append(MinerUtil.SPACE_PLUS).append(rollText.ownText())
+							.append(MinerUtil.SPACE).append(sublabelText.ownText()).append(MinerUtil.SPACE);
+						} else {
+							builder.append(MinerUtil.SPACE_PLUS).append(rollText.ownText())
+							.append(MinerUtil.SPACE).append(sublabelText.ownText()).append(MinerUtil.SPACE);
+						}
+					}					
+				}
+			
+				/**
+				 * sheet-damagetemplate is non-optional, however its contents
+				 * will change if the optional sheet-atk is missing, or the sheet-atk 
+				 * block is also a sheet-save block.
+				 */
+				if(sheetAttack != null) {
+					Element soloRoll = sheetDmg.getElementsByClass(MinerUtil.SHEET_SOLO).first();
+					if(soloRoll != null) {
+						Element damageText = soloRoll.getElementsByClass(MinerUtil.INLINE_ROLL_RESULT).first();
+						Element damageType = soloRoll.getElementsByClass(MinerUtil.SHEET_SUB_LABEL).first();
+								
+						builder.append("For ").append(damageText.text());		
+						builder.append(" of ").append(damageType.ownText()).append(MinerUtil.SPACE).append(" damage.");
+					} else {
+						//The SHEET_ADV element here represents a case where we have two distinct damage types to manage:
+						Element firstRoll = sheetDmg.getElementsByClass(MinerUtil.SHEET_ADV).first().getElementsByClass(MinerUtil.INLINE_ROLL_RESULT).first();
+						Element firstLabel = sheetDmg.getElementsByClass(MinerUtil.SHEET_ADV).first().getElementsByClass(MinerUtil.SHEET_SUB_LABEL).first();
+						Element secondRoll = sheetDmg.getElementsByClass(MinerUtil.SHEET_ADV).get(1).getElementsByClass(MinerUtil.INLINE_ROLL_RESULT).first();
+						Element secondLabel = sheetDmg.getElementsByClass(MinerUtil.SHEET_ADV).get(1).getElementsByClass(MinerUtil.SHEET_SUB_LABEL).first();
+					
+						builder.append("For ").append(firstRoll.text());		
+						builder.append(" of ").append(firstLabel.ownText()).append(MinerUtil.SPACE);
+						builder.append("and ").append(secondRoll.text());		
+						builder.append(" of ").append(secondLabel.ownText()).append(MinerUtil.SPACE).append(" damage.");		
+					}
+				} else {
+					Element soloRoll = sheetDmg.getElementsByClass(MinerUtil.SHEET_SOLO).first();
+					if(soloRoll != null) {
+						Element rollText = soloRoll.getElementsByClass(MinerUtil.INLINE_ROLL_RESULT).first();
+						Element rollSublabel = soloRoll.getElementsByClass(MinerUtil.SHEET_SUB_LABEL).first();
+						Element labelText = sheetDmg.getElementsByClass(MinerUtil.LABEL).first();
+						//Element rangeText = sheetDmg.getElementsByClass(MinerUtil.SHEET_SUB_LABEL).first();
+						
+						builder.append(labelText.text()).append(" for ")
+							.append(rollText.text()).append(MinerUtil.SPACE).append(MinerUtil.HP)
+							.append(" of ").append(rollSublabel.text()).append(MinerUtil.SPACE); 					
+					} else {
+						builder.append("Unparsable entry");
+						LOGGER.info("Received message content we are unsure about parsing: " + sheetDmg.toString());
+					}
+				}
 			}
 		}
+		messageContents.add(builder.toString());
 	}
 
 	@Override
@@ -90,22 +143,15 @@ public class DamageMessage extends Message {
 
 	@Override
 	public String toCsvString() {
+		boolean foundFirst = false;
 		StringBuilder builder = new StringBuilder();
-		builder.append(super.toCsvString("AttackDamage"));
+		builder.append(super.toCsvString("Attack"));		
 		
-		for(int i = 0; i < attackRolls.size(); i++) {
-			builder.append(attackRolls.get(i) + MinerUtil.LINEFEED);
-			if(sheetLabels.size() > i) {
-				builder.append(sheetLabels.get(i) + MinerUtil.LINEFEED);		
-			}
-			if(damageRolls.size() > i) {
-				builder.append(damageRolls.get(i) + MinerUtil.LINEFEED);
-			}
-			if(sheetSubDamages.size() > i) {
-				builder.append(sheetSubDamages.get(i) + MinerUtil.LINEFEED);
-			}
-		}
-		
+		for(String content : messageContents) {
+			if(foundFirst) builder.append(MinerUtil.LINEFEED);
+			builder.append(content);
+			foundFirst = true;
+		}		
 		return builder.toString();
 	}
 }

@@ -46,10 +46,17 @@ public class LogMinerParser {
 				boolean isTimestamp = currElement.getElementsByClass(MinerUtil.TIMESTAMP).first() != null;
 				boolean isDesc = currElement.getElementsByClass(MinerUtil.DESCRIPTION).first() != null;
 				boolean isEmote = currElement.getElementsByClass(MinerUtil.EMOTE).first() != null;
+				boolean hasClassYou = currElement.getElementsByClass(MinerUtil.YOU).first() != null;
 	
-				//if the current element has no timestamp, it must be a part of a 
-				//multi-element message, or it is a description/emote message:
-				if(!isTimestamp) { 
+				/**
+				 * If the current element contains no timestamp, one of several cases
+				 * must be checked:
+				 * 1 - the message is a Description
+				 * 2 - the message is an Emote
+				 * 3 - the message is of class 'you'
+				 * 4 - the message is a part of a multi-element message
+				 */
+				if(!isTimestamp) {	
 					if(isDesc) {
 						/**
 						 * descriptions are single line messages without a timestamp or author,
@@ -74,6 +81,15 @@ public class LogMinerParser {
 						currentDiv.appendElement("span").addClass(MinerUtil.TIMESTAMP).text(previousTimestamp);
 						currentDiv.appendElement("span").addClass(MinerUtil.SENDER).text("Emote");
 												
+						combine = combineElements(workingElements);
+						if(combine != null)  parsedElements.add(combine);
+						workingElements.clear();
+						parsedElements.add(currElement);
+					} else if(hasClassYou) {
+						Element currentDiv = currElement.select("div").first();
+						currentDiv.appendElement("span").addClass(MinerUtil.TIMESTAMP).text(previousTimestamp);
+						currentDiv.appendElement("span").addClass(MinerUtil.SENDER).text("DM");
+						
 						combine = combineElements(workingElements);
 						if(combine != null)  parsedElements.add(combine);
 						workingElements.clear();

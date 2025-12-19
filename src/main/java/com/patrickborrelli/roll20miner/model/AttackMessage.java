@@ -43,7 +43,7 @@ public class AttackMessage extends Message {
 			builder = new StringBuilder();
 			
 			Element attackText = line.getElementsByClass(MinerUtil.INLINE_ROLL_RESULT).first();
-			builder.append(attackText.attr("title")).append(MinerUtil.EQ).append(attackText.ownText());
+			builder.append(attackText.attr("title")).append(MinerUtil.SPACE_EQ).append(attackText.ownText());
 			
 			attackRolls.add(MinerUtil.cleanAttackText(builder.toString()));
 		}			

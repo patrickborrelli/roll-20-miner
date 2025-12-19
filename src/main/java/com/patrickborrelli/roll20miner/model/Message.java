@@ -1,5 +1,7 @@
 package com.patrickborrelli.roll20miner.model;
 
+import org.jsoup.nodes.Element;
+
 import com.patrickborrelli.roll20miner.util.MinerUtil;
 
 import lombok.Data;
@@ -58,5 +60,10 @@ public abstract class Message {
 	    builder.append(MinerUtil.QUOTE);
 
 	    return builder.toString();
+	}
+	
+	protected boolean isAdvantage(Element firstAdv, Element secondAdv) {
+		//TODO: add logic
+		return false;
 	}
 }

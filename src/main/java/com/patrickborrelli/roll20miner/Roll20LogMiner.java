@@ -25,7 +25,7 @@ public class Roll20LogMiner {
 		LogMinerParser parser = new LogMinerParser();
 		
 		if(args == null || (args.length != 1  && args.length != 3)) {
-			//TODO: print out usage text and terminate
+			//print out usage text and terminate
 			LOGGER.error("Usage:  java Roll20LogMiner <file containing chat log> [<output file> <CSV||TXT>]");
 			System.exit(1);
 		} 		

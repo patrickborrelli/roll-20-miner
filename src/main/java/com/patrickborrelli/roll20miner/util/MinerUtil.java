@@ -38,17 +38,31 @@ public class MinerUtil {
 	public static final String SHEET_DAMAGE = "sheet-damage";
 	public static final String SHEET_HEADER = "sheet-header";
 	public static final String SHEET_SUBHEADER = "sheet-subheader";
-
+	public static final String SHEET_SOLO = "sheet-solo";
+	public static final String SHEET_ADV = "sheet-adv";
+	public static final String SHEET_SAVE = "sheet-save";
+	public static final String SHEET_SAVE_DC = "sheet-savedc";
+	public static final String SHEET_RESULT = "sheet-result";
+	public static final String TITLE = "title";
 	public static final String EMOTE_MESSAGE = "em";
+	public static final String YOU = "you";
 
 	// generic constants
 	public static final String SPACE = " ";
 	public static final String EMPTY_STRING = "";
-	public static final String EQ = " = ";
+	public static final String SPACE_EQ = " = ";
+	public static final String SPACE_PLUS = " + ";
 	public static final String QUOTE = "\"";
 	public static final String DOUBLE_QUOTE = "\"\"";
 	public static final String COMMA = ",";
-	public static final String LINEFEED = "\t";
+	public static final String LINEFEED = " / ";
+	public static final String HP = "hp";
+
+	public static String cleanAttackText(String attack) {
+		// utility method to eliminate known bad formatting in Roll20 chat log messages:
+		return attack.replace("<span class=\"basicdiceroll\">", MinerUtil.EMPTY_STRING)
+				.replace("</span>", MinerUtil.EMPTY_STRING).replace("cs>20", MinerUtil.EMPTY_STRING);
+	}
 
 	public static MinerUtil getInstance() {
 		if (instance == null) {
@@ -62,11 +76,5 @@ public class MinerUtil {
 	}
 
 	private MinerUtil() {
-	}
-
-	public static String cleanAttackText(String attack) {
-		// utility method to eliminate known bad formatting in Roll20 chat log messages:
-		return attack.replace("<span class=\"basicdiceroll\">", MinerUtil.EMPTY_STRING)
-				.replace("</span>", MinerUtil.EMPTY_STRING).replace("cs>20", MinerUtil.EMPTY_STRING);
 	}
 }

@@ -37,7 +37,7 @@ public class SimpleRollMessage extends Message {
 			Element aRoll = roll.getElementsByClass(MinerUtil.INLINE_ROLL_RESULT).first();
 			
 			if(aRoll != null) {
-				builder.append(aRoll.attr("title")).append(MinerUtil.EQ).append(aRoll.ownText());
+				builder.append(aRoll.attr("title")).append(MinerUtil.SPACE_EQ).append(aRoll.ownText());
 				
 				rolls.add(MinerUtil.cleanAttackText(builder.toString()));
 			}
